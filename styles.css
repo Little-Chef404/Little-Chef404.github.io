@@ -1,0 +1,231 @@
+:root {
+    --theme-color: #06019c;
+    --bg-color: #f8fafc;
+    --text-color: #1e293b;
+    --border-color: #e2e8f0;
+    --hover-color: #f1f5f9;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+}
+
+.dark-mode {
+    --bg-color: #0d0c20;
+    --text-color: #e2e8f0;
+    --border-color: #1e293b;
+    --hover-color: #1e293b;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.15), 0 2px 4px -1px rgba(0, 0, 0, 0.10);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.20), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    height: 100vh;
+    display: flex;
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar {
+    width: 250px;
+    background: var(--bg-color);
+    border-right: 1px solid var(--border-color);
+    padding: 20px;
+    overflow-y: auto;
+    box-shadow: var(--shadow);
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background: var(--bg-color);
+}
+
+.toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+button {
+    background: var(--theme-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    box-shadow: var(--shadow);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    opacity: 0.9;
+}
+
+.toolbar button:last-child {
+    margin-left: auto;
+}
+
+select,
+input[type="color"] {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-color);
+    color: var(--text-color);
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+}
+
+.editor {
+    flex: 1;
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    overflow-y: auto;
+    background: var(--bg-color);
+    font-size: 16px;
+    line-height: 1.8;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    transition: border-color 0.3s;
+}
+
+.editor:focus {
+    border-color: var(--theme-color);
+    outline: none;
+}
+
+.diary-list {
+    list-style: none;
+}
+
+.diary-item {
+    padding: 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: var(--shadow);
+}
+
+.dark-mode .diary-item {
+    background: rgba(30, 41, 59, 0.3);
+}
+
+.diary-item:hover {
+    background: var(--hover-color);
+    transform: translateX(4px);
+}
+
+.diary-item.active {
+    background: var(--theme-color);
+    color: white;
+    box-shadow: var(--shadow-lg);
+}
+
+.delete-btn {
+    background: #ef4444;
+    padding: 4px 8px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.diary-item:hover .delete-btn {
+    opacity: 1;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--bg-color);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    max-width: 500px;
+    width: 90%;
+    border: 1px solid var(--border-color);
+}
+
+.color-picker {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.settings-group {
+    margin-bottom: 20px;
+}
+
+.settings-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.indent-controls {
+    display: flex;
+    gap: 5px;
+}
+
+.indent-controls button {
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+/* 富文本样式 */
+.editor b,
+.editor strong {
+    font-weight: 700;
+}
+
+.editor i,
+.editor em {
+    font-style: italic;
+}
+
+.editor u {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: 200px;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+}
